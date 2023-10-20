@@ -1,6 +1,7 @@
 import express from 'express';
 import bilanganGanjilRoutes from './routes/bilanganganjil.route.js';
 import bilanganPrimaRoutes from './routes/bilanganprima.route.js';
+import segitigaAngkaRoutes from './routes/segitigaangka.route.js';
 
 const app = express();
 app.use(express.json());
@@ -15,3 +16,4 @@ app.get('/', (req, res) => {
 
 app.use('/api', bilanganGanjilRoutes);
 app.use('/api', bilanganPrimaRoutes);
+app.use('/api', segitigaAngkaRoutes);

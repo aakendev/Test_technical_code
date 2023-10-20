@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export default function App() {
   const [angka, setAngka] = useState('');
+  const [hasil, setHasil] = useState('');
   function onChange(e) {
     setAngka(Number(e.target.value));
   }
@@ -28,11 +29,23 @@ export default function App() {
     const data = await postResponse.json();
     console.log(data);
   }
+
+  async function tombolSegitigaAngka() {
+    const postResponse = await fetch('/api/segitigaangka', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ angka }),
+    });
+    const data = await postResponse.json();
+    console.log(data);
+  }
   return (
     <div className='App'>
       <InputanAngka onChange={onChange} value={angka} />
       <div className='grup-tombol'>
-        <TombolFungsi onClick={() => alert('Test Button 1')}>
+        <TombolFungsi onClick={tombolSegitigaAngka}>
           Generate Segitiga
         </TombolFungsi>
         <TombolFungsi onClick={tombolHitungGanjil}>
@@ -42,7 +55,7 @@ export default function App() {
           Generate Bilangan Prima
         </TombolFungsi>
       </div>
-      <KolomHasil />
+      <KolomHasil hasil={hasil} />
     </div>
   );
 }
@@ -62,6 +75,11 @@ function TombolFungsi({ children, onClick }) {
   return <button onClick={onClick}>{children}</button>;
 }
 
-function KolomHasil() {
-  return <h1>Result:</h1>;
+function KolomHasil({ hasil }) {
+  return (
+    <>
+      <h1>Result:</h1>
+      <p>{hasil}</p>
+    </>
+  );
 }
