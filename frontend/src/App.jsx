@@ -16,6 +16,7 @@ export default function App() {
     });
     const data = await postResponse.json();
     console.log(data);
+    setHasil(`Bilangan Ganjil dari 0 s/d ${angka} adalah : ${data.data}`);
   }
 
   async function tombolHitungPrima() {
