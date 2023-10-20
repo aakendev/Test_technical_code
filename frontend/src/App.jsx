@@ -6,14 +6,26 @@ export default function App() {
     setAngka(Number(e.target.value));
   }
   async function tombolHitungGanjil() {
-    const response = await fetch('/api/bilanganganjil', {
+    const postResponse = await fetch('/api/bilanganganjil', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ angka }),
     });
-    const data = await response.json();
+    const data = await postResponse.json();
+    console.log(data);
+  }
+
+  async function tombolHitungPrima() {
+    const postResponse = await fetch('/api/bilanganprima', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ angka }),
+    });
+    const data = await postResponse.json();
     console.log(data);
   }
   return (
@@ -26,7 +38,7 @@ export default function App() {
         <TombolFungsi onClick={tombolHitungGanjil}>
           Generate Bilangan Ganjil
         </TombolFungsi>
-        <TombolFungsi onClick={() => alert('Test Button 3')}>
+        <TombolFungsi onClick={tombolHitungPrima}>
           Generate Bilangan Prima
         </TombolFungsi>
       </div>
